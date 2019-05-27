@@ -1,0 +1,46 @@
+<?php /* @var $this \View\ThemesList */ ?>
+<?php $themesAmount = count($this->getThemesCollection()) ?>
+<?= "We have {$themesAmount} themes" ?>
+<?php
+$themes = $this->getThemesCollection();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Themes</title>
+    <link rel="stylesheet" type="text/css" href="<?= App::getUrlModel()->getStaticUrl('css', 'style.css') ?>">
+</head>
+<body>
+<a href="<?= App::getUrlModel()->getUrl('theme/new', []) ?>">Add new theme</a>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Last post</th>
+        <th>Last post's date</th>
+        <th colspan="2">Action</th>
+    </tr>
+    </thead>
+
+    <?php foreach ($themes as $theme): ?>
+        <tr>
+            <td>
+                <a href="<?= App::getUrlModel()->getUrl('topic/index', ['theme_id' => $theme->getId()]) ?>"><?= htmlspecialchars($theme->getName()); ?></a>
+            </td>
+            <td><?= htmlspecialchars($theme->getDescription()); ?></td>
+            <td><?= htmlspecialchars($theme->getCreatedAt()); ?></td>
+            <td><?= htmlspecialchars($theme->getTopicName()); ?></td>
+            <td><?= htmlspecialchars($theme->getTopicTimestamp()); ?></td>
+            <td>
+                <a href="<?= App::getUrlModel()->getUrl('theme/edit', ['id' => $theme->getId()]) ?>" class="edit_btn">Edit</a>
+            </td>
+            <td>
+                <a href="<?= App::getUrlModel()->getUrl('theme/delete', ['id' => $theme->getId()]) ?>" class="del_btn">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+</body>
+</html>

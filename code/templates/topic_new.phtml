@@ -1,0 +1,27 @@
+<?php /* @var $this \View\TopicsNew */ ?>
+<?php
+$topic = $this->getTopic();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topic</title>
+</head>
+<body>
+<form method="post" action='<?= App::getUrlModel()->getUrl('topic/save', []) ?>'>
+    <input type="hidden" name="id" value="<?= htmlspecialchars($topic->getId()); ?>">
+    <input type="hidden" name="theme_id" value="<?= htmlspecialchars($topic->getThemeId()); ?>">
+    <div class="input-group">
+        <label for="topicName">Name</label>
+        <input type="text" id="topicName" class="topic-name" name="topic_name"
+               value="<?= htmlspecialchars($topic->getName()); ?>">
+    </div>
+    <div class="input-group">
+        <textarea name="content"><?= htmlspecialchars($topic->getContent()); ?></textarea>
+    </div>
+    <div class="input-group">
+        <button class="btn" type="submit" name="save">Save</button>
+    </div>
+</form>
+</body>
+</html>

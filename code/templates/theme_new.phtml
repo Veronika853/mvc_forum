@@ -1,0 +1,25 @@
+<?php /* @var $this \View\ThemesNew */ ?>
+<?php
+$theme = $this->getTheme();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme</title>
+</head>
+<body>
+<form method="post" action='<?= App::getUrlModel()->getUrl('theme/save', []) ?>'>
+    <input type="hidden" name="id" value="<?= htmlspecialchars($theme->getId()); ?>"
+    <div class="input-group">
+        <label for="themeName">Name</label>
+        <input type="text" id="themeName" class="theme-name" name="theme_name" value="<?= htmlspecialchars($theme->getName()); ?>">
+    </div>
+    <div class="input-group">
+        <textarea name="description"><?= htmlspecialchars($theme->getDescription()); ?></textarea>
+    </div>
+    <div class="input-group">
+        <button class="btn" type="submit" name="save">Save</button>
+    </div>
+</form>
+</body>
+</html>

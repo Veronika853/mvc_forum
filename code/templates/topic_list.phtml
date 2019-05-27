@@ -1,0 +1,45 @@
+<?php /* @var $this \View\TopicsList */ ?>
+<?php
+$themeId = $this->getThemeId();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topics</title>
+    <link rel="stylesheet" type="text/css" href="<?= App::getUrlModel()->getStaticUrl('css', 'style.css') ?>">
+</head>
+<body>
+
+<a href="<?= App::getUrlModel()->getUrl('theme/index', []) ?>">< Back</a>
+<a href="<?= App::getUrlModel()->getUrl('topic/new', ['theme_id' => $themeId]) ?>">Add new topic</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Date</th>
+        <th colspan="2">Action</th>
+    </tr>
+    </thead>
+
+    <?php foreach ($this->getTopicsCollection() as $topic): ?>
+        <tr>
+            <td><?= htmlspecialchars($topic->getName()); ?></td>
+            <td><?= htmlspecialchars($topic->getContent()); ?></td>
+            <td><?= htmlspecialchars($topic->getCreatedAt()); ?></td>
+
+            <td>
+                <a href="<?= App::getUrlModel()->getUrl('topic/edit', ['id' => $topic->getId()]) ?>" class="edit_btn">Edit</a>
+            </td>
+            <td>
+                <a href="<?= App::getUrlModel()->getUrl('topic/delete', ['id' => $topic->getId()]) ?>" class="del_btn">Delete</a>
+
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+</body>
+</html>
+
